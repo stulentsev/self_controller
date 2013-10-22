@@ -7,10 +7,11 @@ class SelfController < Sinatra::Base
   end
   
   get '*' do
-    host = request.host
+    @host = request.host
     da = DataAccessor.new
-    new_count = da.add_hit(host)
-    "You tried #{new_count} hits to #{host} today alone. Better get to work."
+    @new_count = da.add_hit(@host)
+    
+    erb :hits
   end
   
   # start the server if ruby file executed directly
